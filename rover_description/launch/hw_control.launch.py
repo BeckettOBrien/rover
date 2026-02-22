@@ -86,35 +86,15 @@ def generate_launch_description():
         output='screen',
     )
 
-    gripper_controller = Node(
-        package='controller_manager',
-        executable='spawner',
-        arguments=['rover_gripper_controller'],
-        output='screen',
-    )
-
     spawn_controllers = RegisterEventHandler(
         OnProcessStart(
             target_action=controller_manager,
             on_start=[
                 joint_state_broadcaster,
                 drive_controller,
-                arm_controller,
-                gripper_controller
+                arm_controller
             ],
         )
-    )
-
-    rviz = Node(
-        package="rviz2",
-        executable="rviz2",
-        name="rviz2",
-        output="log",
-        arguments=[
-            "--display-config", rviz_config_file,
-            "--fixed-frame", "odom"
-        ],
-        parameters=[{"use_sim_time": True}],
     )
 
     return LaunchDescription([
@@ -122,6 +102,5 @@ def generate_launch_description():
         drive_pdb_uros_agent,
         arm_uros_agent,
         controller_manager,
-        spawn_controllers,
-        rviz,
+        spawn_controllers
     ])

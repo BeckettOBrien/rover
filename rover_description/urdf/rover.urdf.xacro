@@ -309,7 +309,7 @@
       lower="-2.3562"
       upper="2.3562"
       velocity="0.25"
-      effort="0.0"
+      effort="120.0"
       />
   </joint>
   <link name="Arm_Stage_1">
@@ -366,7 +366,7 @@
       lower="-1.5708"
       upper="1.0472"
       velocity="0.25"
-      effort="0.0"
+      effort="400.0"
       />
   </joint>
   <link name="Arm_Stage_2">
@@ -423,7 +423,7 @@
       lower="-2.3562"
       upper="2.3562"
       velocity="0.5"
-      effort="0.0"
+      effort="100.0"
       /> <!-- really vel should be 1.2 -->
   </joint>
   <link name="Arm_Stage_3">
@@ -480,7 +480,7 @@
       lower="-3.1416"
       upper="3.1416"
       velocity="0.5"
-      effort="0.0"
+      effort="25.0"
       /> <!-- really vel should be 1.2 -->
   </joint>
   <link name="Arm_Stage_4">
@@ -537,7 +537,7 @@
       lower="-1.5708"
       upper="1.5708"
       velocity="0.5"
-      effort="0.0"
+      effort="25.0"
       /> <!-- really vel should be 1.2 -->
   </joint>
   <link name="Arm_Gripper">
@@ -594,8 +594,14 @@
       lower="-3.1416"
       upper="3.1416"
       velocity="0.5"
-      effort="0.0"
+      effort="25.0"
       /> <!-- really vel should be 1.2 -->
+  </joint>
+  <link name="tcp_link" />
+  <joint name="gripper_to_tcp" type="fixed">
+    <parent link="Arm_Gripper"/>
+    <child link="tcp_link"/>
+    <origin xyz="0 0.3 0" rpy="0 0 0"/>
   </joint>
 
   <xacro:rover_ros2_control use_gazebo="$(arg use_gazebo)"/>

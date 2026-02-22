@@ -87,13 +87,3 @@ rover_arm_controller:
     state_interfaces:
       - position
       - velocity
-
-rover_gripper_controller:
-  ros__parameters:
-    joints:
-      - Arm_Wrist_Rotate
-    command_interfaces:
-      - position
-    state_interfaces:
-      - position
-      - velocity
