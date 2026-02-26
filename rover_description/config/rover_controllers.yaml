@@ -9,10 +9,10 @@ controller_manager:
       type: diff_drive_controller/DiffDriveController
     
     rover_arm_controller:
-      type: joint_trajectory_controller/JointTrajectoryController
+      type: position_controllers/JointGroupPositionController #joint_trajectory_controller/JointTrajectoryController
 
     rover_gripper_controller:
-      type: joint_trajectory_controller/JointTrajectoryController
+      type: position_controllers/JointGroupPositionController
 
 rover_drive_controller:
   ros__parameters:
