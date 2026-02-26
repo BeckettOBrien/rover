@@ -603,6 +603,13 @@
     <child link="tcp_link"/>
     <origin xyz="0 0.3 0" rpy="0 0 0"/>
   </joint>
+  <link name="dummy_gripper_link" />
+  <joint name="Arm_Gripper_Clamp" type="continuous">
+    <parent link="tcp_link" />
+    <child link="dummy_gripper_link" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <axis xyz="1 0 0" />
+  </joint>
 
   <xacro:rover_ros2_control use_gazebo="$(arg use_gazebo)"/>
 

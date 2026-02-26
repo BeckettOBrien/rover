@@ -97,6 +97,14 @@
         <param name="position_target_scale">175616.0</param>
         <param name="differential_index">1</param>
       </joint>
+      <joint name="Arm_Gripper_Clamp">
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+        <command_interface name="position"/>
+        <!-- <command_interface name="velocity"/> -->
+        <param name="epos_node_id">6</param>
+        <param name="position_target_scale">117000.0</param>
+      </joint>
     </ros2_control>
 
     <ros2_control name="RoverArmSteppers" type="system">

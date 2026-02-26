@@ -31,11 +31,11 @@ rover_drive_controller:
 
     publish_rate: 50.0
     # odom_frame_id: odom
-    # base_frame_id: base_link
+    base_frame_id: base_link
 
     position_feedback: false
-    # pose_covariance_diagonal : [0.001, 0.001, 0.001, 0.001, 0.001, 0.01]
-    # twist_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.01]
+    pose_covariance_diagonal : [0.001, 0.001, 0.001, 0.001, 0.001, 0.01]
+    twist_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.01]
 
     # open_loop: true
     enable_odom_tf: false
@@ -87,3 +87,19 @@ rover_arm_controller:
     state_interfaces:
       - position
       - velocity
+
+rover_gripper_controller:
+  ros__parameters:
+    state_publish_rate: 10.0
+
+    constraints:
+      goal_time: 0.5
+
+    joints:
+      - Arm_Gripper_Clamp
+    
+    command_interfaces:
+      - position
+    
+    state_interfaces:
+      - position

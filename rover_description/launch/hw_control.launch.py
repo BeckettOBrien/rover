@@ -86,13 +86,21 @@ def generate_launch_description():
         output='screen',
     )
 
+    gripper_controller = Node(
+        package='controller_manager',
+        executable='spawner',
+        arguments=['rover_gripper_controller'],
+        output='screen'
+    )
+
     spawn_controllers = RegisterEventHandler(
         OnProcessStart(
             target_action=controller_manager,
             on_start=[
                 joint_state_broadcaster,
                 drive_controller,
-                arm_controller
+                arm_controller,
+                gripper_controller
             ],
         )
     )
