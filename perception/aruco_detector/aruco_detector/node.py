@@ -156,7 +156,7 @@ class ArucoDetectorNode(Node):
     def _declare_parameters(self):
         """Declare all ROS parameters."""
         self.declare_parameter('dictionary', 'DICT_4X4_50')
-        self.declare_parameter('marker_size_m', 0.20)
+        self.declare_parameter('marker_size_m', 0.15)
         self.declare_parameter('min_side_px', 20)
         self.declare_parameter('adaptive_thresh_win_size_min', 3)
         self.declare_parameter('adaptive_thresh_win_size_max', 23)

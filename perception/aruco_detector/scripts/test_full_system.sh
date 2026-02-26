@@ -81,7 +81,7 @@ python3 install/aruco_detector/bin/aruco_detector_node \
     -p cam_info_topic:=/zed2i/zed2i_camera/left/camera_info \
     -p depth_topic:=/zed2i/zed2i_camera/depth/depth_registered \
     -p use_depth:=true \
-    -p marker_size_m:=0.20 \
+    -p marker_size_m:=0.15 \
     -r aruco_detections:=/aruco/detections \
     -r aruco_markers:=/aruco/markers \
     > /tmp/aruco.log 2>&1 &

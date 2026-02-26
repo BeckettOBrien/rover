@@ -186,7 +186,7 @@ def main():
     parser.add_argument('--svo', type=str, default=None,
                         help='Optional SVO file')
     parser.add_argument('--marker-size', type=float,
-                        default=0.20, help='Marker size in meters')
+                        default=0.15, help='Marker size in meters')
     parser.add_argument('--dictionary', type=str,
                         default='DICT_4X4_50', help='ArUco dictionary')
     parser.add_argument('--no-gl', action='store_true',

@@ -4,7 +4,7 @@
     dictionary: "DICT_4X4_50"
     
     # Physical marker size (edge length in meters)
-    marker_size_m: 0.20
+    marker_size_m: 0.15
     
     # Detection parameters
     min_side_px: 20                          # Minimum marker side in pixels

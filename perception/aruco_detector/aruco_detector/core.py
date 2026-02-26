@@ -81,7 +81,7 @@ class ArucoDetectorCore:
     def __init__(
         self,
         dictionary: int = aruco.DICT_4X4_50,
-        marker_size_m: float = 0.20,
+        marker_size_m: float = 0.15,
         min_side_px: int = 20,
         adaptive_thresh_win_size_min: int = 3,
         adaptive_thresh_win_size_max: int = 23,
@@ -104,7 +104,13 @@ class ArucoDetectorCore:
         
         # ArUco dictionary and parameters
         self.dictionary = aruco.getPredefinedDictionary(dictionary)
-        self.params = aruco.DetectorParameters()
+        # OpenCV API compatibility:
+        # - newer: DetectorParameters()
+        # - older: DetectorParameters_create()
+        if hasattr(aruco, "DetectorParameters"):
+            self.params = aruco.DetectorParameters()
+        else:
+            self.params = aruco.DetectorParameters_create()
         self.params.minMarkerPerimeterRate = min_side_px / 1000.0
         self.params.adaptiveThreshWinSizeMin = adaptive_thresh_win_size_min
         self.params.adaptiveThreshWinSizeMax = adaptive_thresh_win_size_max
@@ -117,8 +123,13 @@ class ArucoDetectorCore:
         self.params.cornerRefinementMinAccuracy = 0.01  # Min accuracy
         self.params.polygonalApproxAccuracyRate = 0.03  # More lenient polygon fitting
         
-        # Create ArUco detector (OpenCV 4.7+ API)
-        self.aruco_detector = aruco.ArucoDetector(self.dictionary, self.params)
+        # Create ArUco detector.
+        # OpenCV 4.7+: ArucoDetector class.
+        # Older OpenCV: use functional detectMarkers API.
+        self.aruco_detector = None
+        self.use_aruco_detector_class = hasattr(aruco, "ArucoDetector")
+        if self.use_aruco_detector_class:
+            self.aruco_detector = aruco.ArucoDetector(self.dictionary, self.params)
         
         # Async processing
         self.enable_async = enable_async
@@ -255,8 +266,11 @@ class ArucoDetectorCore:
         else:
             gray = image
         
-        # Detect markers (OpenCV 4.7+ API)
-        corners, ids, rejected = self.aruco_detector.detectMarkers(gray)
+        # Detect markers with API fallback for older OpenCV versions.
+        if self.use_aruco_detector_class and self.aruco_detector is not None:
+            corners, ids, rejected = self.aruco_detector.detectMarkers(gray)
+        else:
+            corners, ids, rejected = aruco.detectMarkers(gray, self.dictionary, parameters=self.params)
         
         detections = []
         
